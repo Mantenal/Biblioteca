@@ -7,6 +7,7 @@ package proyecto_coco_distribuidos;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JFrame;
 
 /**
  *
@@ -21,6 +22,8 @@ public class Registro extends javax.swing.JFrame {
         initComponents();
            this.setLocationRelativeTo(null);
         cargaricono();
+        JFrame mainFrame = new JFrame("No Resizable!!");
+        mainFrame.setResizable(false);
     }
     
     public void cargaricono(){
