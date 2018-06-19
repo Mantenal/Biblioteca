@@ -4,40 +4,41 @@
  * and open the template in the editor.
  */
 package Conexion;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Carlos
- */
 public class Conexion {
+
+    // conexiones
+    protected static Connection con = null;
     
-    private Connection con=null;
-    public Connection conexion(){
-        
+    // usuario y clave
+    private String user = "root";
+    private String password = "";
+
+    public Conexion() {
+
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca","root","");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException e) {
+            System.out.println( "Error en la conexión, verifique, su usuario "
+                    + "y password o el nombre de la base a la que intenta "
+                    + "conectarse");
+            e.printStackTrace();
         }
-        
-        
-      return con;  
     }
     
-    public void cerrarConexion(Connection con){
-        try {
-           
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Connection getCon() {
+        return con;
     }
-   
-    
 }
