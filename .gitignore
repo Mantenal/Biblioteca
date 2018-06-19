@@ -26,3 +26,5 @@ hs_err_pid*
 /Prueba Corba/CorbaAdditionServer/build/
 /Prueba Corba/CorbaAdditionServer/dist/
 /Prueba Corba/CorbaAdditionServer/nbproject/private/
+/Encriptacion/build/
+/Encriptacion/nbproject/private/
