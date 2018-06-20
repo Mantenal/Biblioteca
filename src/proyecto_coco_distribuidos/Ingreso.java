@@ -8,7 +8,6 @@ package proyecto_coco_distribuidos;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 /**
  *
@@ -24,9 +23,6 @@ public class Ingreso extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         cargaricono();
-        JFrame mainFrame = new JFrame("No Resizable!!");
-        mainFrame.setResizable(false);
-        
     }
     
     public void cargaricono(){
@@ -58,10 +54,11 @@ public class Ingreso extends javax.swing.JFrame {
         botonIngresar = new javax.swing.JButton();
         botonRegistro = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingreso");
         setBackground(new java.awt.Color(204, 204, 204));
         setIconImages(null);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(97, 212, 195));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -99,20 +96,32 @@ public class Ingreso extends javax.swing.JFrame {
         Contrasena.setBackground(new java.awt.Color(239, 239, 239));
         Contrasena.setForeground(new java.awt.Color(153, 153, 153));
         Contrasena.setBorder(null);
+        Contrasena.setSelectionColor(new java.awt.Color(153, 204, 255));
 
         Usuario.setBackground(new java.awt.Color(239, 239, 239));
         Usuario.setForeground(new java.awt.Color(153, 153, 153));
         Usuario.setBorder(null);
+        Usuario.setSelectionColor(new java.awt.Color(153, 204, 255));
 
         botonIngresar.setForeground(new java.awt.Color(153, 153, 153));
         botonIngresar.setText("Ingresar");
         botonIngresar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        botonIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonIngresarMouseClicked(evt);
+            }
+        });
 
         botonRegistro.setBackground(new java.awt.Color(239, 239, 239));
         botonRegistro.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         botonRegistro.setForeground(new java.awt.Color(153, 153, 153));
         botonRegistro.setText("Crear una cuenta");
         botonRegistro.setBorder(null);
+        botonRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonRegistroMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,9 +169,9 @@ public class Ingreso extends javax.swing.JFrame {
                 .addComponent(Contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonRegistro)
                 .addContainerGap())
         );
@@ -172,8 +181,24 @@ public class Ingreso extends javax.swing.JFrame {
         Usuario.getAccessibleContext().setAccessibleDescription("");
         botonRegistro.getAccessibleContext().setAccessibleName("Registro");
 
+        getAccessibleContext().setAccessibleName("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistroMouseClicked
+        // TODO add your handling code here:
+        Registro registro =new Registro();
+        registro.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonRegistroMouseClicked
+
+    private void botonIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarMouseClicked
+        // TODO add your handling code here:
+        Principal principal = new Principal();
+        principal.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonIngresarMouseClicked
 
     /**
      * @param args the command line arguments
