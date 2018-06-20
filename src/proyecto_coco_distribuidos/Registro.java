@@ -58,8 +58,10 @@ public class Registro extends javax.swing.JFrame {
         Contrasena = new javax.swing.JPasswordField();
         VerificacionContrasena = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registro");
         setBackground(new java.awt.Color(204, 153, 0));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -127,12 +129,22 @@ public class Registro extends javax.swing.JFrame {
         BotonRegistrarme.setText("Registrarme");
         BotonRegistrarme.setToolTipText("");
         BotonRegistrarme.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        BotonRegistrarme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonRegistrarmeMouseClicked(evt);
+            }
+        });
 
         BotonMicuenta.setBackground(new java.awt.Color(239, 239, 239));
         BotonMicuenta.setFont(new java.awt.Font("Century Gothic", 1, 10)); // NOI18N
         BotonMicuenta.setForeground(new java.awt.Color(153, 153, 153));
         BotonMicuenta.setText("Ya tengo mi cuenta");
         BotonMicuenta.setBorder(null);
+        BotonMicuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonMicuentaMouseClicked(evt);
+            }
+        });
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -145,6 +157,7 @@ public class Registro extends javax.swing.JFrame {
         Usuario.setBackground(new java.awt.Color(239, 239, 239));
         Usuario.setForeground(new java.awt.Color(153, 153, 153));
         Usuario.setBorder(null);
+        Usuario.setSelectionColor(new java.awt.Color(188, 189, 244));
         Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsuarioActionPerformed(evt);
@@ -154,14 +167,17 @@ public class Registro extends javax.swing.JFrame {
         Correo.setBackground(new java.awt.Color(239, 239, 239));
         Correo.setForeground(new java.awt.Color(153, 153, 153));
         Correo.setBorder(null);
+        Correo.setSelectionColor(new java.awt.Color(188, 189, 244));
 
         Contrasena.setBackground(new java.awt.Color(239, 239, 239));
         Contrasena.setForeground(new java.awt.Color(153, 153, 153));
         Contrasena.setBorder(null);
+        Contrasena.setSelectionColor(new java.awt.Color(188, 189, 244));
 
         VerificacionContrasena.setBackground(new java.awt.Color(239, 239, 239));
         VerificacionContrasena.setForeground(new java.awt.Color(153, 153, 153));
         VerificacionContrasena.setBorder(null);
+        VerificacionContrasena.setSelectionColor(new java.awt.Color(188, 189, 244));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,6 +280,20 @@ public class Registro extends javax.swing.JFrame {
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UsuarioActionPerformed
+
+    private void BotonMicuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMicuentaMouseClicked
+        // TODO add your handling code here:
+         Ingreso ingreso = new Ingreso();
+          ingreso.setVisible(true);
+            this.setVisible(false);
+    }//GEN-LAST:event_BotonMicuentaMouseClicked
+
+    private void BotonRegistrarmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegistrarmeMouseClicked
+        // TODO add your handling code here:
+         Ingreso ingreso = new Ingreso();
+          ingreso.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BotonRegistrarmeMouseClicked
 
     /**
      * @param args the command line arguments

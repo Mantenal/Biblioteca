@@ -16,11 +16,14 @@ public class Proyecto_coco_distribuidos {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+       
         Ingreso ingreso = new Ingreso();
-        Registro registro =new Registro();
-        
         ingreso.setVisible(true);
-        registro.setVisible(true);
+        
+        Principal inicio =new Principal();
+        inicio.setVisible(true);
+        
+
     }
     
 }
