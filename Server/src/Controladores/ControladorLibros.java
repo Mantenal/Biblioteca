@@ -21,19 +21,22 @@ import java.util.logging.Logger;
  */
 public class ControladorLibros extends Conexion {
 
-    private static Connection con;
 
     public ControladorLibros() {
         super();
-        this.con = super.getCon();
     }
 
-    public static ArrayList<Modelos.ModeloLibros> mostrarTodos() {
+    public ArrayList<Modelos.ModeloLibros> mostrarTodosPorUsuario(String usuario) {
         try {
             ArrayList<Modelos.ModeloLibros> listaLibros = new ArrayList<>();
             ResultSet resultLibros;
-            PreparedStatement sql = con.prepareStatement("SELECT *FROM libros");
+            PreparedStatement sql = con.prepareStatement(
+                    "SELECT *"
+                    + "FROM libros"
+                    + "WHERE fk_usuario = ?"
+            );
 
+            sql.setString(1, usuario);
             resultLibros = sql.executeQuery();
             resultLibros.first();
 
@@ -55,16 +58,19 @@ public class ControladorLibros extends Conexion {
             return null;
         }
     }
-    
-    public static ArrayList<ModeloLibros> mostrarUno(int id){
-           try {
+
+    public ArrayList<ModeloLibros> mostrarUnoPorUsuario(int id, String usuario) {
+        try {
             ArrayList<Modelos.ModeloLibros> listaLibros = new ArrayList<>();
             ResultSet resultLibros;
             PreparedStatement sql = con.prepareStatement(""
                     + "SELECT *"
                     + "FROM libros "
-                    + "WHERE id_libro = ?");
+                    + "WHERE id_libro = ? AND fk_usuario = ?");
+
             sql.setInt(1, id);
+            sql.setString(2, usuario);
+
             resultLibros = sql.executeQuery();
             resultLibros.first();
 
@@ -87,4 +93,26 @@ public class ControladorLibros extends Conexion {
         }
     }
 
+    public boolean insertLibro(String tituloLibro, String autor, String descripcion, int estado, double precio, String usuario) {
+        try {
+            PreparedStatement sql = con.prepareStatement(
+                    "INSERT INTO libros "
+                    + "VALUES (?, ?, ?, ?, ?, ?)");
+            sql.setString(1, tituloLibro);
+            sql.setString(2, autor);
+            sql.setString(3, descripcion);
+            sql.setInt(4, estado);
+            sql.setDouble(5, precio);
+            sql.setString(6, usuario);
+            if (sql.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 }
