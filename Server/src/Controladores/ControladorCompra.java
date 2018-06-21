@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,26 @@ public class ControladorCompra extends Conexion {
 
     public ControladorCompra() {
         super();
+    }
+
+    public boolean insertCompra(Date fecha, String usuarioCompra, int idLibro, String usuarioVenta) {
+        try {
+            PreparedStatement sql = con.prepareStatement(
+                    "INSERT INTO compra_venta "
+                    + "VALUES (?, ?, ?, ?, ?, ?)");
+            sql.setDate(1, fecha);
+            sql.setString(2, usuarioCompra);
+            sql.setInt(3, idLibro);
+            sql.setString(4, usuarioVenta);
+            if (sql.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     public ArrayList<ModeloCompra> mostrarTodos() {
@@ -56,9 +77,9 @@ public class ControladorCompra extends Conexion {
             return null;
         }
     }
-    
-    public ArrayList<ModeloCompra> mostrarComprasPorUsuario(String usuario){
-           try {
+
+    public ArrayList<ModeloCompra> mostrarComprasPorUsuario(String usuario) {
+        try {
             ArrayList<ModeloCompra> listaCompra = new ArrayList<>();
             ResultSet resultCompra;
             PreparedStatement sql = con.prepareStatement(""
@@ -88,10 +109,9 @@ public class ControladorCompra extends Conexion {
             return null;
         }
     }
-    
-    
-    public ArrayList<ModeloCompra> mostrarVentasPorUsuario(String usuario){
-           try {
+
+    public ArrayList<ModeloCompra> mostrarVentasPorUsuario(String usuario) {
+        try {
             ArrayList<ModeloCompra> listaCompra = new ArrayList<>();
             ResultSet resultCompra;
             PreparedStatement sql = con.prepareStatement(""

@@ -25,6 +25,30 @@ public class ControladorLibros extends Conexion {
     public ControladorLibros() {
         super();
     }
+    
+    
+    public boolean insertLibro(String tituloLibro, String autor, String descripcion, int estado, double precio, String usuario) {
+        try {
+            PreparedStatement sql = con.prepareStatement(
+                    "INSERT INTO libros "
+                    + "VALUES (?, ?, ?, ?, ?, ?)");
+            sql.setString(1, tituloLibro);
+            sql.setString(2, autor);
+            sql.setString(3, descripcion);
+            sql.setInt(4, estado);
+            sql.setDouble(5, precio);
+            sql.setString(6, usuario);
+            if (sql.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 
     public ArrayList<Modelos.ModeloLibros> mostrarTodosPorUsuario(String usuario) {
         try {
@@ -92,27 +116,41 @@ public class ControladorLibros extends Conexion {
             return null;
         }
     }
-
-    public boolean insertLibro(String tituloLibro, String autor, String descripcion, int estado, double precio, String usuario) {
+    
+    //Estado = 0 = sin vender, Estado = 1 = vendido
+    public ArrayList<ModeloLibros> mostrarLibrosPorEstado(String usuario, int estado) {
         try {
-            PreparedStatement sql = con.prepareStatement(
-                    "INSERT INTO libros "
-                    + "VALUES (?, ?, ?, ?, ?, ?)");
-            sql.setString(1, tituloLibro);
-            sql.setString(2, autor);
-            sql.setString(3, descripcion);
-            sql.setInt(4, estado);
-            sql.setDouble(5, precio);
-            sql.setString(6, usuario);
-            if (sql.executeUpdate() == 1) {
-                return true;
-            } else {
-                return false;
-            }
+            ArrayList<Modelos.ModeloLibros> listaLibros = new ArrayList<>();
+            ResultSet resultLibros;
+            PreparedStatement sql = con.prepareStatement(""
+                    + "SELECT *"
+                    + "FROM libros "
+                    + "WHERE estado = ? AND fk_usuario = ?");
 
+            sql.setInt(1, estado);
+            sql.setString(2, usuario);
+
+            resultLibros = sql.executeQuery();
+            resultLibros.first();
+
+            while (!resultLibros.isAfterLast()) {
+                listaLibros.add(new ModeloLibros(
+                        resultLibros.getInt("id_libro"),
+                        resultLibros.getString("titulo_libro"),
+                        resultLibros.getString("autor"),
+                        resultLibros.getString("descripcion"),
+                        resultLibros.getInt("estado"),
+                        resultLibros.getDouble("precio")
+                ));
+                resultLibros.next();
+            }
+            resultLibros.close();
+            return listaLibros;
         } catch (SQLException ex) {
             Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return null;
         }
     }
+    
+    
 }

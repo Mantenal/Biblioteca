@@ -5,7 +5,7 @@
  */
 package Modelos;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -18,6 +18,8 @@ public class ModeloCompra {
     private int fkLibro;
     private String fkUsuarioVen;
     private String tituloLibro;
+
+    
     
     public ModeloCompra(){}
 
@@ -71,6 +73,12 @@ public class ModeloCompra {
         this.fkUsuarioVen = fkUsuarioVen;
     }
     
-       
+    public String getTituloLibro() {
+        return tituloLibro;
+    }
+
+    public void setTituloLibro(String tituloLibro) {
+        this.tituloLibro = tituloLibro;
+    }   
     
 }
