@@ -81,3 +81,7 @@ hs_err_pid*
 Server/nbproject/private/private\.xml
 
 Cliente/nbproject/private/private\.xml
+
+Cliente/nbproject/private/
+
+Server/nbproject/private/
