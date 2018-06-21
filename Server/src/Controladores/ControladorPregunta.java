@@ -72,4 +72,36 @@ public class ControladorPregunta extends Conexion {
             return null;
         }
     }
+    
+    public ArrayList<ModeloPregunta> buscarPregunta(String busqueda){
+            try {
+            ArrayList<ModeloPregunta> listaPreguntas = new ArrayList<>();
+            ResultSet resultPreguntas;
+            PreparedStatement sql = con.prepareStatement(
+                    "SELECT *"
+                    + "FROM pregunta"
+                    + "WHERE titulo_pregunta LIKE ?"
+            );
+
+            sql.setString(0, busqueda);
+            resultPreguntas = sql.executeQuery();
+            resultPreguntas.first();
+
+            while (!resultPreguntas.isAfterLast()) {
+                listaPreguntas.add(new ModeloPregunta(
+                        resultPreguntas.getInt("id_pregunta"),
+                        resultPreguntas.getString("titulo_pregunta"),
+                        resultPreguntas.getString("texto"),
+                        resultPreguntas.getString("fk_usuario")
+                ));
+                resultPreguntas.next();
+            }
+            resultPreguntas.close();
+            return listaPreguntas;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
 }
