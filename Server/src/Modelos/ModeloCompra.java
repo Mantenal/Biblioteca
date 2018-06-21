@@ -17,15 +17,17 @@ public class ModeloCompra {
     private String fkUsuarioCom;
     private int fkLibro;
     private String fkUsuarioVen;
+    private String tituloLibro;
     
     public ModeloCompra(){}
 
-    public ModeloCompra(int id, Date fecha, String fkUsuarioCom, int fkLibro, String fkUsuarioVen) {
+    public ModeloCompra(int id, Date fecha, String fkUsuarioCom, int fkLibro, String fkUsuarioVen, String tituloLibro) {
         this.id = id;
         this.fecha = fecha;
         this.fkUsuarioCom = fkUsuarioCom;
         this.fkLibro = fkLibro;
         this.fkUsuarioVen = fkUsuarioVen;
+        this.tituloLibro = tituloLibro;
     }
     
 
