@@ -50,9 +50,9 @@ public class ControladorLibros extends Conexion {
         }
     }
 
-    public ArrayList<Modelos.ModeloLibros> mostrarTodosPorUsuario(String usuario) {
+    public ArrayList<ModeloLibros> mostrarTodosPorUsuario(String usuario) {
         try {
-            ArrayList<Modelos.ModeloLibros> listaLibros = new ArrayList<>();
+            ArrayList<ModeloLibros> listaLibros = new ArrayList<>();
             ResultSet resultLibros;
             PreparedStatement sql = con.prepareStatement(
                     "SELECT *"
