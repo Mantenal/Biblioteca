@@ -77,3 +77,7 @@ hs_err_pid*
 /Encriptacion/nbproject/private/
 /Encriptacion/dist/
 >>>>>>> Interfaces
+
+Server/nbproject/private/private\.xml
+
+Cliente/nbproject/private/private\.xml
