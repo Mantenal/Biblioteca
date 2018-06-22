@@ -1,5 +1,17 @@
 
 import Conexion.Conexion;
+import Controladores.ControladorCompra;
+import Controladores.ControladorUsuario;
+import Modelos.ModeloCompra;
+import Modelos.ModeloUsuario;
+import java.util.ArrayList;
+import java.util.Iterator;
+import org.omg.CORBA.ORB;
+import org.omg.CosNaming.NameComponent;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+import org.omg.PortableServer.POA;
+import org.omg.PortableServer.POAHelper;
 
 
 
@@ -22,7 +34,7 @@ public class NewMain {
     public static void main(String[] args) {
         // TODO code application logic here
         Conexion tuGta = new Conexion();
-        
+            
     }
     
 }
