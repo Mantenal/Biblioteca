@@ -131,6 +131,11 @@ public class PublicacionLibro extends javax.swing.JFrame {
         BotonCancelar.setForeground(new java.awt.Color(153, 153, 153));
         BotonCancelar.setText("Cancelar");
         BotonCancelar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        BotonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonCancelarMouseClicked(evt);
+            }
+        });
         BotonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonCancelarActionPerformed(evt);
@@ -259,6 +264,12 @@ public class PublicacionLibro extends javax.swing.JFrame {
     private void BotonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonCancelarActionPerformed
+
+    private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
+        // TODO add your handling code here:
+                this.setVisible(false);
+
+    }//GEN-LAST:event_BotonCancelarMouseClicked
 
     /**
      * @param args the command line arguments

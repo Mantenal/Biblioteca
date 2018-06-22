@@ -173,6 +173,7 @@ public class PrincipalSinUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
           Ingreso ingreso = new Ingreso();
           ingreso.setVisible(true);
+          
     }//GEN-LAST:event_botonIngresarMouseClicked
 
     private void botonRegistrarmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarmeMouseClicked

@@ -7,6 +7,8 @@ package proyecto_coco_distribuidos;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
@@ -30,16 +32,28 @@ public class Principal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
     }
+    public void agregarPublicacion(JComponent c){
+        MuestraPublicaciones.add(c);
+        MuestraPublicaciones.setPreferredSize(new Dimension(
+            (int)MuestraPublicaciones.getPreferredSize().getWidth(),
+            (int) MuestraPublicaciones.getPreferredSize().getHeight() + c.getHeight()));
+    }
+    
     public void publicaciones(){
+           MuestraPublicaciones.setPreferredSize(new Dimension(
+            (int)MuestraPublicaciones.getPreferredSize().getWidth(),
+            0));
+   
       JComponent l = new Libro();
       JComponent p = new Pregunta();
       JComponent v = new Vendo();
       v.setBounds(0, 0, 547, 170);
       p.setBounds(0, 170, 547, 130);
       l.setBounds(0, 300, 547, 200);
-      MuestraPublicaciones.add(v);
-      MuestraPublicaciones.add(l);
-      MuestraPublicaciones.add(p);
+      agregarPublicacion(v);
+      agregarPublicacion(l);
+      agregarPublicacion(p);
+     
     }
     public void conUsuario(){
      JComponent t = new PrincipalUsuario();
@@ -118,7 +132,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -130,18 +144,19 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
+        jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setAutoscrolls(true);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout MuestraPublicacionesLayout = new javax.swing.GroupLayout(MuestraPublicaciones);
         MuestraPublicaciones.setLayout(MuestraPublicacionesLayout);
         MuestraPublicacionesLayout.setHorizontalGroup(
             MuestraPublicacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 556, Short.MAX_VALUE)
         );
         MuestraPublicacionesLayout.setVerticalGroup(
             MuestraPublicacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 353, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(MuestraPublicaciones);
@@ -155,15 +170,15 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PanelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 

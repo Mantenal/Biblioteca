@@ -65,6 +65,11 @@ public class ConfirmacionDevolucion extends javax.swing.JFrame {
         BotonCancelar.setText("Cancelar");
         BotonCancelar.setToolTipText("");
         BotonCancelar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        BotonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonCancelarMouseClicked(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/confirmaciodevolucion.png"))); // NOI18N
 
@@ -123,6 +128,11 @@ public class ConfirmacionDevolucion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
+        // TODO add your handling code here:
+                this.setVisible(false);
+    }//GEN-LAST:event_BotonCancelarMouseClicked
 
     /**
      * @param args the command line arguments

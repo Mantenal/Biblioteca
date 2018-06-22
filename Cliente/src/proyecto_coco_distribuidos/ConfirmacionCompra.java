@@ -137,7 +137,7 @@ public class ConfirmacionCompra extends javax.swing.JFrame {
 
     private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
         // TODO add your handling code here:
-        
+        this.setVisible(false);
     }//GEN-LAST:event_BotonCancelarMouseClicked
 
     /**
