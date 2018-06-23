@@ -300,6 +300,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonVenderMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator4">
       <Properties>

@@ -6,7 +6,6 @@
 package Controladores;
 
 import Conexion.Conexion;
-import Modelos.ModeloLibros;
 import Modelos.ModeloPregunta;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,9 +25,7 @@ public class ControladorPregunta extends Conexion {
     
     public boolean insertPregunta(String titulo, String texto, String usuario){
         try {
-            PreparedStatement sql = con.prepareStatement(""
-                    + "INSERT INTO pregunta"
-                    + "VALUES(?, ?, ?)");
+            PreparedStatement sql = con.prepareStatement(" INSERT INTO pregunta(titulo_pregunta, texto, fk_usuario) VALUES (?, ?, ?)");
             sql.setString(1, titulo);
             sql.setString(2, texto);
             sql.setString(3, usuario);
@@ -49,10 +46,38 @@ public class ControladorPregunta extends Conexion {
             ArrayList<ModeloPregunta> listaPreguntas = new ArrayList<>();
             ResultSet resultPreguntas;
             PreparedStatement sql = con.prepareStatement(
-                    "SELECT *"
-                    + "FROM pregunta"
+                    "SELECT * FROM pregunta"
             );
 
+            resultPreguntas = sql.executeQuery();
+            resultPreguntas.first();
+
+            while (!resultPreguntas.isAfterLast()) {
+                listaPreguntas.add(new ModeloPregunta(
+                        resultPreguntas.getInt("id_pregunta"),
+                        resultPreguntas.getString("titulo_pregunta"),
+                        resultPreguntas.getString("texto"),
+                        resultPreguntas.getString("fk_usuario")
+                ));
+                resultPreguntas.next();
+            }
+            resultPreguntas.close();
+            return listaPreguntas;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorPregunta.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    
+    public ArrayList<ModeloPregunta> allPreguntasExceptPropias(String usuario){
+            try {
+            ArrayList<ModeloPregunta> listaPreguntas = new ArrayList<>();
+            ResultSet resultPreguntas;
+            PreparedStatement sql = con.prepareStatement(
+                    "SELECT * FROM pregunta WHERE fk_usuario != ?"
+            );
+            sql.setString(1, usuario);
             resultPreguntas = sql.executeQuery();
             resultPreguntas.first();
 
@@ -73,17 +98,16 @@ public class ControladorPregunta extends Conexion {
         }
     }
     
+    
     public ArrayList<ModeloPregunta> buscarPregunta(String busqueda){
             try {
             ArrayList<ModeloPregunta> listaPreguntas = new ArrayList<>();
             ResultSet resultPreguntas;
             PreparedStatement sql = con.prepareStatement(
-                    "SELECT *"
-                    + "FROM pregunta"
-                    + "WHERE titulo_pregunta LIKE ?"
+                    "SELECT * FROM pregunta WHERE titulo_pregunta LIKE ?"
             );
 
-            sql.setString(0, busqueda);
+            sql.setString(1, ("%"+busqueda+"%"));
             resultPreguntas = sql.executeQuery();
             resultPreguntas.first();
 

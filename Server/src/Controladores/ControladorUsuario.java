@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Cristofer
  */
-public class ControladorUsuario extends Conexion{
+public class ControladorUsuario extends Conexion {
 
     public ControladorUsuario() {
         super();
@@ -26,8 +26,7 @@ public class ControladorUsuario extends Conexion{
     public boolean insertUsuario(String usuario, String pass, String correo, double saldo) {
         try {
             PreparedStatement sql = con.prepareStatement(
-                    "INSERT INTO usuarios "
-                    + "VALUES (?, ?, ?, ?)");
+                    "INSERT INTO usuarios VALUES (?, ?, ?, ?)");
             sql.setString(1, usuario);
             sql.setString(2, pass);
             sql.setString(3, correo);
@@ -47,11 +46,8 @@ public class ControladorUsuario extends Conexion{
     public boolean checkUsuarioExistente(String usuario) {
         try {
             ResultSet resultUsuarios;
-            PreparedStatement sql = con.prepareStatement(""
-                    + "SELECT usuario, password"
-                    + "FROM usuarios "
-                    + "WHERE usuario = ?");
-
+            PreparedStatement sql = con.prepareStatement("SELECT usuario, password FROM usuarios WHERE usuario = ?");
+            System.out.println("");
             sql.setString(1, usuario);
 
             resultUsuarios = sql.executeQuery();
@@ -71,10 +67,7 @@ public class ControladorUsuario extends Conexion{
     public boolean logInUsuario(String usuario, String password) {
         try {
             ResultSet resultUsuarios;
-            PreparedStatement sql = con.prepareStatement(""
-                    + "SELECT usuario, password"
-                    + "FROM usuarios "
-                    + "WHERE usuario = ? AND password = ?");
+            PreparedStatement sql = con.prepareStatement("SELECT usuario, password FROM usuarios WHERE usuario = ? AND password = ?");
 
             sql.setString(1, usuario);
             sql.setString(2, password);
@@ -88,24 +81,39 @@ public class ControladorUsuario extends Conexion{
                 return false;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    public double getSaldo(String usuario) {
+        try {
+            PreparedStatement sql;
+            double saldo;
+            sql = con.prepareStatement("SELECT saldo FROM usuarios WHERE usuario = ?");
+            sql.setString(1, usuario);
+            ResultSet resultSaldo = sql.executeQuery();
+            resultSaldo.first();
+            saldo = resultSaldo.getDouble("saldo");
+            resultSaldo.close();
+            return saldo;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return 0.0;
+        }
+
     }
 
     public ModeloUsuario getDatosUsuario(String usuario) {
         try {
             ModeloUsuario listaUsuario = new ModeloUsuario();
             ResultSet resultUsuario;
-            PreparedStatement sql = con.prepareStatement(
-                    "SELECT *"
-                    + "FROM usuarios"
-                    + "WHERE usuario = ?"
-            );
+            PreparedStatement sql = con.prepareStatement("SELECT * FROM usuarios WHERE usuario = ?");
             sql.setString(1, usuario);
             resultUsuario = sql.executeQuery();
             resultUsuario.first();
-            listaUsuario.setUsername(resultUsuario.getString("username"));
+            listaUsuario.setUsername(resultUsuario.getString("usuario"));
             listaUsuario.setSaldo(resultUsuario.getDouble("saldo"));
             return listaUsuario;
 

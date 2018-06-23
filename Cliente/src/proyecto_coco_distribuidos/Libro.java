@@ -5,6 +5,9 @@
  */
 package proyecto_coco_distribuidos;
 
+import java.awt.Label;
+import javax.swing.JButton;
+
 /**
  *
  * @author Danae
@@ -18,6 +21,55 @@ public class Libro extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JButton getBotonDevolver() {
+        return BotonDevolver;
+    }
+
+    public void setBotonDevolver(JButton BotonDevolver) {
+        this.BotonDevolver = BotonDevolver;
+    }
+
+    public Label getEstadoVenta() {
+        return EstadoVenta;
+    }
+
+    public void setEstadoVenta(Label EstadoVenta) {
+        this.EstadoVenta = EstadoVenta;
+    }
+
+    public Label getPublicacionAutor() {
+        return PublicacionAutor;
+    }
+
+    public void setPublicacionAutor(Label PublicacionAutor) {
+        this.PublicacionAutor = PublicacionAutor;
+    }
+
+    public Label getPublicacionDescripcion() {
+        return PublicacionDescripcion;
+    }
+
+    public void setPublicacionDescripcion(Label PublicacionDescripcion) {
+        this.PublicacionDescripcion = PublicacionDescripcion;
+    }
+
+    public Label getPublicacionPrecio() {
+        return PublicacionPrecio;
+    }
+
+    public void setPublicacionPrecio(Label PublicacionPrecio) {
+        this.PublicacionPrecio = PublicacionPrecio;
+    }
+
+    public Label getTitulo() {
+        return Titulo;
+    }
+
+    public void setTitulo(Label Titulo) {
+        this.Titulo = Titulo;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +80,7 @@ public class Libro extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
+        Titulo = new java.awt.Label();
         EstadoVenta = new java.awt.Label();
         label4 = new java.awt.Label();
         PublicacionAutor = new java.awt.Label();
@@ -40,9 +92,9 @@ public class Libro extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(216, 216, 216));
 
-        label1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 255, 255));
-        label1.setText("Este es el  Titulo de mi libro ");
+        Titulo.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        Titulo.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo.setText("Este es el  Titulo de mi libro ");
 
         EstadoVenta.setBackground(new java.awt.Color(216, 216, 216));
         EstadoVenta.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
@@ -55,7 +107,7 @@ public class Libro extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addComponent(EstadoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -66,7 +118,7 @@ public class Libro extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(EstadoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -163,8 +215,8 @@ public class Libro extends javax.swing.JPanel {
     private java.awt.Label PublicacionAutor;
     private java.awt.Label PublicacionDescripcion;
     private java.awt.Label PublicacionPrecio;
+    private java.awt.Label Titulo;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     private java.awt.Label label4;
     private java.awt.Label label7;
     private java.awt.Label label8;

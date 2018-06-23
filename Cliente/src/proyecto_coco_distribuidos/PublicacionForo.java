@@ -5,8 +5,15 @@
  */
 package proyecto_coco_distribuidos;
 
+import Extras.UsuarioAux;
+import Main.ConexionRMI;
+import RMI.Informacion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,21 +21,24 @@ import java.awt.Toolkit;
  */
 public class PublicacionForo extends javax.swing.JFrame {
 
+    private Informacion vinculo;
+
     /**
      * Creates new form PublicacionForo
      */
     public PublicacionForo() {
         initComponents();
-                 this.setLocationRelativeTo(null);
+        vinculo = new ConexionRMI().getC();
+        this.setLocationRelativeTo(null);
         cargaricono();
     }
-    
-    public void cargaricono(){
-   Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
-   setIconImage(icon);
-   setVisible(true);
-   this.setLocationRelativeTo(null);
-            }
+
+    public void cargaricono() {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
+        setIconImage(icon);
+        setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,6 +104,11 @@ public class PublicacionForo extends javax.swing.JFrame {
         BotonPublicar.setText("Publicar");
         BotonPublicar.setToolTipText("");
         BotonPublicar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        BotonPublicar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonPublicarMouseClicked(evt);
+            }
+        });
 
         jSeparator4.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -101,6 +116,11 @@ public class PublicacionForo extends javax.swing.JFrame {
         TituloPregunta.setForeground(new java.awt.Color(153, 153, 153));
         TituloPregunta.setBorder(null);
         TituloPregunta.setSelectionColor(new java.awt.Color(214, 179, 248));
+        TituloPregunta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TituloPreguntaActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(204, 153, 255));
         jPanel2.setForeground(new java.awt.Color(204, 153, 255));
@@ -219,9 +239,29 @@ public class PublicacionForo extends javax.swing.JFrame {
 
     private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
         // TODO add your handling code here:
-                this.setVisible(false);
+        this.setVisible(false);
 
     }//GEN-LAST:event_BotonCancelarMouseClicked
+
+    private void BotonPublicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonPublicarMouseClicked
+        // TODO add your handling code here:
+        String tituloPregunta = TituloPregunta.getText();
+        String descripcionPregunta = DescripcionPregunta.getText();
+        try {
+            if (vinculo.insertPregunta(tituloPregunta, descripcionPregunta, UsuarioAux.getUsername())) {
+                JOptionPane.showMessageDialog(rootPane, "Pregunta subida con exito");
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Error al subir pregunta");
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(PublicacionForo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BotonPublicarMouseClicked
+
+    private void TituloPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TituloPreguntaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TituloPreguntaActionPerformed
 
     /**
      * @param args the command line arguments

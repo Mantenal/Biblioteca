@@ -27,9 +27,7 @@ public class ControladorRespuesta extends Conexion {
 
     public boolean insertRespuesta(String titulo, String texto, String usuario, int pregunta) {
         try {
-            PreparedStatement sql = con.prepareStatement(""
-                    + "INSERT INTO respuesta"
-                    + "VALUES(?, ?, ?, ?)");
+            PreparedStatement sql = con.prepareStatement("INSERT INTO respuesta VALUES(?, ?, ?, ?)");
             sql.setString(1, titulo);
             sql.setString(2, texto);
             sql.setString(3, usuario);
@@ -50,9 +48,7 @@ public class ControladorRespuesta extends Conexion {
             ArrayList<ModeloRespuesta> listaRespuestas = new ArrayList<>();
             ResultSet resultRespuesta;
             PreparedStatement sql = con.prepareStatement(
-                    "SELECT *"
-                    + "FROM respuesta"
-                    + "WHERE fk_pregunta = ?"
+                    "SELECT * FROM respuesta WHERE fk_pregunta = ?"
             );
             
             sql.setInt(1, pregunta);

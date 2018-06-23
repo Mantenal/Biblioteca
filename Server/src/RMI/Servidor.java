@@ -4,21 +4,21 @@
  * and open the template in the editor.
  */
 package RMI;
+
 import java.rmi.Naming;
 
-			public class Servidor {
+public class Servidor {
 
-			   public Servidor() {
-			     try {
-			       Informacion c = new Impl();
-			       Naming.rebind("rmi://localhost:1099/ServidorAl", c);
-			     } catch (Exception e) {
-			       System.out.println("Trouble: " + e);
-			     }
-			   }
-	
-			   public static void main(String args[]) {
-			     new Servidor();
-			   }
-			}
-			
+    public Servidor() {
+        try {
+            Informacion c = new Impl();
+            Naming.rebind("rmi://192.168.84.215:1099/ServidorAl", c);
+        } catch (Exception e) {
+            System.out.println("Trouble: " + e);
+        }
+    }
+
+    public static void main(String args[]) {
+        new Servidor();
+    }
+}

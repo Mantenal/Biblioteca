@@ -11,19 +11,20 @@ import java.io.Serializable;
  *
  * @author Carlos
  */
-public class ModeloPregunta implements Serializable{
+public class ModeloRespuesta implements Serializable {
     private int id;
-    private String tituloPregunta;
+    private String titulo;
     private String texto;
     private String fkUsuario;
-    
-    public ModeloPregunta(){}
+    private int fkPregunta;
+    public ModeloRespuesta(){}
 
-    public ModeloPregunta(int id, String tituloPregunta, String texto, String fkUsuario) {
+    public ModeloRespuesta(int id, String titulo, String texto, String fkUsuario, int fkPregunta) {
         this.id = id;
-        this.tituloPregunta = tituloPregunta;
+        this.titulo = titulo;
         this.texto = texto;
         this.fkUsuario = fkUsuario;
+        this.fkPregunta = fkPregunta;
     }
     
 
@@ -35,12 +36,12 @@ public class ModeloPregunta implements Serializable{
         this.id = id;
     }
 
-    public String getTituloPregunta() {
-        return tituloPregunta;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTituloPregunta(String tituloPregunta) {
-        this.tituloPregunta = tituloPregunta;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getTexto() {
@@ -58,6 +59,16 @@ public class ModeloPregunta implements Serializable{
     public void setFkUsuario(String fkUsuario) {
         this.fkUsuario = fkUsuario;
     }
+
+    public int getFkPregunta() {
+        return fkPregunta;
+    }
+
+    public void setFkPregunta(int fkPregunta) {
+        this.fkPregunta = fkPregunta;
+    }
+    
+    
     
     
 }

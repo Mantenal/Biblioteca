@@ -5,6 +5,8 @@
  */
 package proyecto_coco_distribuidos;
 
+import java.awt.Label;
+
 /**
  *
  * @author Danae
@@ -18,6 +20,24 @@ public class Pregunta extends javax.swing.JPanel {
         initComponents();
     }
 
+    public Label getDescripcionPublicacion() {
+        return descripcionPublicacion;
+    }
+
+    public void setDescripcionPublicacion(Label descripcionPublicacion) {
+        this.descripcionPublicacion = descripcionPublicacion;
+    }
+
+    public Label getTituloPregunta() {
+        return tituloPregunta;
+    }
+
+    public void setTituloPregunta(Label tituloPregunta) {
+        this.tituloPregunta = tituloPregunta;
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,16 +48,16 @@ public class Pregunta extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
+        tituloPregunta = new java.awt.Label();
         label6 = new java.awt.Label();
-        PublicacionDescripcion = new java.awt.Label();
+        descripcionPublicacion = new java.awt.Label();
         BotonResponder = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(216, 216, 216));
 
-        label1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 255, 255));
-        label1.setText("Yo soy el Titulo de la pregunta");
+        tituloPregunta.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        tituloPregunta.setForeground(new java.awt.Color(255, 255, 255));
+        tituloPregunta.setText("Yo soy el Titulo de la pregunta");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -45,14 +65,14 @@ public class Pregunta extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tituloPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(274, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tituloPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -60,9 +80,9 @@ public class Pregunta extends javax.swing.JPanel {
         label6.setForeground(new java.awt.Color(153, 153, 153));
         label6.setText("Descripcion:");
 
-        PublicacionDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
-        PublicacionDescripcion.setForeground(new java.awt.Color(102, 102, 102));
-        PublicacionDescripcion.setText("yo soy la descripcion");
+        descripcionPublicacion.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
+        descripcionPublicacion.setForeground(new java.awt.Color(102, 102, 102));
+        descripcionPublicacion.setText("yo soy la descripcion");
 
         BotonResponder.setForeground(new java.awt.Color(153, 153, 153));
         BotonResponder.setText("Responder");
@@ -82,7 +102,7 @@ public class Pregunta extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PublicacionDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descripcionPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(BotonResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -94,7 +114,7 @@ public class Pregunta extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PublicacionDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descripcionPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -109,9 +129,9 @@ public class Pregunta extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonResponder;
-    private java.awt.Label PublicacionDescripcion;
+    private java.awt.Label descripcionPublicacion;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     private java.awt.Label label6;
+    private java.awt.Label tituloPregunta;
     // End of variables declaration//GEN-END:variables
 }

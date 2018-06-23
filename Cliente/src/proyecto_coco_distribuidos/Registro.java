@@ -5,8 +5,15 @@
  */
 package proyecto_coco_distribuidos;
 
+import Extras.UsuarioAux;
+import Main.ConexionRMI;
+import RMI.Informacion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,21 +21,25 @@ import java.awt.Toolkit;
  */
 public class Registro extends javax.swing.JFrame {
 
+    private Informacion vinculo;
+
     /**
      * Creates new form Registro
      */
     public Registro() {
         initComponents();
-           this.setLocationRelativeTo(null);
+        vinculo = new ConexionRMI().getC();
+        this.setLocationRelativeTo(null);
         cargaricono();
     }
-    
-    public void cargaricono(){
-   Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
-   setIconImage(icon);
-   setVisible(true);
-   this.setLocationRelativeTo(null);
-            }
+
+    public void cargaricono() {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
+        setIconImage(icon);
+        setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -279,20 +290,45 @@ public class Registro extends javax.swing.JFrame {
 
     private void UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuarioActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_UsuarioActionPerformed
 
     private void BotonMicuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMicuentaMouseClicked
         // TODO add your handling code here:
-         Ingreso ingreso = new Ingreso();
-          ingreso.setVisible(true);
-            this.setVisible(false);
+        Ingreso ingreso = new Ingreso();
+        ingreso.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BotonMicuentaMouseClicked
 
     private void BotonRegistrarmeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegistrarmeMouseClicked
         // TODO add your handling code here:
-         Ingreso ingreso = new Ingreso();
+        /* Ingreso ingreso = new Ingreso();
           ingreso.setVisible(true);
-        this.setVisible(false);
+        
+        this.setVisible(false);*/
+        String usuario = this.Usuario.getText();
+        String contrasena = this.Contrasena.getText();
+        String correo = this.Correo.getText();
+        double saldo = 100.00;
+        
+        if (!usuario.isEmpty() && !contrasena.isEmpty() && !correo.isEmpty()) {
+            try {
+                if (!vinculo.checkUsuarioExistente(usuario)) {
+                    if (vinculo.insertUsuario(usuario, contrasena, correo, saldo)) {
+                        JOptionPane.showMessageDialog(rootPane, "Registrado con exito");
+                        Ingreso ingreso = new Ingreso();
+                        ingreso.setVisible(true);
+                        this.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Error al registrar");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Usuario ya registrado");
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_BotonRegistrarmeMouseClicked
 
     /**

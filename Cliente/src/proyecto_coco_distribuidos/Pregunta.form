@@ -21,7 +21,7 @@
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="label6" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="PublicacionDescripcion" min="-2" pref="258" max="-2" attributes="0"/>
+              <Component id="descripcionPublicacion" min="-2" pref="258" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="BotonResponder" min="-2" pref="104" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -35,7 +35,7 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="label6" min="-2" max="-2" attributes="0"/>
-                  <Component id="PublicacionDescripcion" min="-2" max="-2" attributes="0"/>
+                  <Component id="descripcionPublicacion" min="-2" max="-2" attributes="0"/>
                   <Component id="BotonResponder" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
@@ -56,7 +56,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="label1" min="-2" max="-2" attributes="0"/>
+                  <Component id="tituloPregunta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="274" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -65,14 +65,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="label1" min="-2" max="-2" attributes="0"/>
+                  <Component id="tituloPregunta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="java.awt.Label" name="label1">
+        <Component class="java.awt.Label" name="tituloPregunta">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Century Gothic" size="18" style="1"/>
@@ -96,7 +96,7 @@
         <Property name="text" type="java.lang.String" value="Descripcion:"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Label" name="PublicacionDescripcion">
+    <Component class="java.awt.Label" name="descripcionPublicacion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="10" style="0"/>

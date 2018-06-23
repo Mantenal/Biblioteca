@@ -5,8 +5,14 @@
  */
 package proyecto_coco_distribuidos;
 
+import Extras.UsuarioAux;
+import Main.ConexionRMI;
+import RMI.Informacion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,22 +21,26 @@ import javax.swing.ImageIcon;
  */
 public class Ingreso extends javax.swing.JFrame {
 
+    private Informacion vinculo;
+
     /**
      * Creates new form Ingreso
      */
     public Ingreso() {
-      
+
         initComponents();
+        vinculo = new ConexionRMI().getC();
         this.setLocationRelativeTo(null);
         cargaricono();
     }
-    
-    public void cargaricono(){
-   Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
-   setIconImage(icon);
-   setVisible(true);
-   this.setLocationRelativeTo(null);
-            }
+
+    public void cargaricono() {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
+        setIconImage(icon);
+        setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -188,16 +198,28 @@ public class Ingreso extends javax.swing.JFrame {
 
     private void botonRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistroMouseClicked
         // TODO add your handling code here:
-        Registro registro =new Registro();
+        Registro registro = new Registro();
         registro.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_botonRegistroMouseClicked
 
     private void botonIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarMouseClicked
         // TODO add your handling code here:
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        this.setVisible(false);
+        Principal principal;
+        try {
+            String usuario = Usuario.getText();
+            String contrasena = Contrasena.getText();
+            System.out.println(vinculo.logInUsuario(usuario, contrasena));
+            if (vinculo.logInUsuario(usuario, contrasena)) {
+                UsuarioAux.setUsername(usuario);
+                UsuarioAux.setSaldo(vinculo.getSaldo(usuario));
+                principal = new Principal();
+                principal.setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonIngresarMouseClicked
 
     /**

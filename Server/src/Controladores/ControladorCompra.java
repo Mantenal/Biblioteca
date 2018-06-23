@@ -30,8 +30,7 @@ public class ControladorCompra extends Conexion {
     public boolean insertCompra(Date fecha, String usuarioCompra, int idLibro, String usuarioVenta) {
         try {
             PreparedStatement sql = con.prepareStatement(
-                    "INSERT INTO compra_venta "
-                    + "VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO compra_venta VALUES (?, ?, ?, ?, ?, ?)");
             sql.setDate(1, fecha);
             sql.setString(2, usuarioCompra);
             sql.setInt(3, idLibro);
@@ -51,26 +50,21 @@ public class ControladorCompra extends Conexion {
         try {
             ArrayList<ModeloCompra> listaCompras = new ArrayList<>();
             ResultSet resultCompras;
-            PreparedStatement sql = con.prepareStatement(""
-                    + "SELECT titulo_libro, id, fecha, fk_usuario_com, "
-                    + "fk_libro, fk_usuario_ven "
-                    + "FROM compra_venta, libros"
-                    + "WHERE fk_libro = id_libro");
+            PreparedStatement sql = con.prepareStatement("SELECT titulo_libro, id, fecha, fk_usuario_com, fk_libro, fk_usuario_ven FROM compra_venta, libros");
 
             resultCompras = sql.executeQuery();
             resultCompras.first();
-
-            while (!resultCompras.isAfterLast()) {
-                listaCompras.add(new ModeloCompra(
+            listaCompras.add(new ModeloCompra(
                         resultCompras.getInt("id"),
                         resultCompras.getDate("fecha"),
                         resultCompras.getString("fk_usuario_com"),
                         resultCompras.getInt("fk_libro"),
                         resultCompras.getString("fk_usuario_ven"),
-                        resultCompras.getString("titulo_libro")
+                        resultCompras.getString("titulo_libro"),
+                        resultCompras.getString("descripcion"),
+                        resultCompras.getString("autor"),
+                        resultCompras.getDouble("precio")
                 ));
-                resultCompras.next();
-            }
             resultCompras.close();
             return listaCompras;
         } catch (SQLException ex) {
@@ -83,11 +77,7 @@ public class ControladorCompra extends Conexion {
         try {
             ArrayList<ModeloCompra> listaCompra = new ArrayList<>();
             ResultSet resultCompra;
-            PreparedStatement sql = con.prepareStatement(""
-                    + "SELECT titulo_libro, id, fecha, fk_usuario_com, "
-                    + "fk_libro, fk_usuario_ven "
-                    + "FROM libros, compra "
-                    + "WHERE fk_usuario_com = ? AND fk_libro = id_libro");
+            PreparedStatement sql = con.prepareStatement("SELECT titulo_libro, descripcion, autor, precio, id, fecha, fk_usuario_com, fk_libro, fk_usuario_ven FROM libros, compra_venta WHERE fk_usuario_com = ? AND fk_libro = id_libro");
             sql.setString(1, usuario);
             resultCompra = sql.executeQuery();
             resultCompra.first();
@@ -99,7 +89,10 @@ public class ControladorCompra extends Conexion {
                         resultCompra.getString("fk_usuario_com"),
                         resultCompra.getInt("fk_libro"),
                         resultCompra.getString("fk_usuario_ven"),
-                        resultCompra.getString("titulo_libro")
+                        resultCompra.getString("titulo_libro"),
+                        resultCompra.getString("descripcion"),
+                        resultCompra.getString("autor"),
+                        resultCompra.getDouble("precio")
                 ));
                 resultCompra.next();
             }
@@ -115,26 +108,23 @@ public class ControladorCompra extends Conexion {
         try {
             ArrayList<ModeloCompra> listaCompra = new ArrayList<>();
             ResultSet resultCompra;
-            PreparedStatement sql = con.prepareStatement(""
-                    + "SELECT titulo_libro, id, fecha, fk_usuario_com, "
-                    + "fk_libro, fk_usuario_ven "
-                    + "FROM libros, compra "
-                    + "WHERE fk_usuario_ven = ? AND fk_libro = id_libro");
+            PreparedStatement sql = con.prepareStatement("SELECT titulo_libro, descripcion, autor, precio, id, fecha, fk_usuario_com, fk_libro, fk_usuario_ven FROM libros, compra_venta WHERE fk_usuario_ven = ? AND fk_libro = id_libro");
             sql.setString(1, usuario);
             resultCompra = sql.executeQuery();
             resultCompra.first();
 
-            while (!resultCompra.isAfterLast()) {
                 listaCompra.add(new ModeloCompra(
                         resultCompra.getInt("id"),
                         resultCompra.getDate("fecha"),
                         resultCompra.getString("fk_usuario_com"),
                         resultCompra.getInt("fk_libro"),
                         resultCompra.getString("fk_usuario_ven"),
-                        resultCompra.getString("titulo_libro")
+                        resultCompra.getString("titulo_libro"),
+                        resultCompra.getString("descripcion"),
+                        resultCompra.getString("autor"),
+                        resultCompra.getDouble("precio")
                 ));
                 resultCompra.next();
-            }
             resultCompra.close();
             return listaCompra;
         } catch (SQLException ex) {

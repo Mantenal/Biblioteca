@@ -42,7 +42,7 @@ public interface Informacion extends java.rmi.Remote{
     
     public ArrayList<ModeloPregunta> allPreguntas()
             throws java.rmi.RemoteException;
-    
+   
      public ArrayList<ModeloPregunta> allPreguntasExceptPropias(String usuario)
              throws java.rmi.RemoteException;
     

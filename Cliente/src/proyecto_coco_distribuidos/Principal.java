@@ -5,13 +5,25 @@
  */
 package proyecto_coco_distribuidos;
 
+import Extras.UsuarioAux;
+import Main.ConexionRMI;
+import Modelos.ModeloCompra;
+import Modelos.ModeloPregunta;
+import Modelos.ModeloUsuario;
+import RMI.Informacion;
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.Toolkit;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,64 +32,153 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 
+    public static int opcion = 0;
+    private Informacion vinculo;
+    private ModeloUsuario usuarios;
+    private JLabel nombre;
+    private JLabel saldo;
+
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal() throws RemoteException {
         initComponents();
+        vinculo = new ConexionRMI().getC();
+        if ((UsuarioAux.getUsername()).equals(" ")) {
+            sinUsuario();
+        } else {
+            conUsuario();
+        }
         cargaricono();
-        sinUsuario();
-         publicaciones();
-        //conUsuario();
+        publicaciones();
         this.setLocationRelativeTo(null);
-
     }
-    public void agregarPublicacion(JComponent c){
+
+    public void agregarPublicacion(JComponent c) {
         MuestraPublicaciones.add(c);
         MuestraPublicaciones.setPreferredSize(new Dimension(
-            (int)MuestraPublicaciones.getPreferredSize().getWidth(),
-            (int) MuestraPublicaciones.getPreferredSize().getHeight() + c.getHeight()));
+                (int) MuestraPublicaciones.getPreferredSize().getWidth(),
+                (int) MuestraPublicaciones.getPreferredSize().getHeight() + c.getHeight()));
+    }
+
+    public void publicaciones() {
+        MuestraPublicaciones.setPreferredSize(new Dimension(
+                (int) MuestraPublicaciones.getPreferredSize().getWidth(),
+                0));
+        /*int i = 0;
+        MuestraPublicaciones.removeAll();
+        MuestraPublicaciones.repaint();
+        MuestraPublicaciones.revalidate();
+        try {
+            ArrayList<ModeloCompra> compras = vinculo.mostrarComprasPorUsuario(UsuarioAux.getUsername());
+            if(compras != null){
+            for (ModeloCompra c : compras) {
+
+                Libro libro = new Libro();
+                Label titulo = libro.getTitulo();
+                Label autor = libro.getPublicacionAutor();
+                Label precio = libro.getPublicacionPrecio();
+                Label descripcion = libro.getPublicacionDescripcion();
+                titulo.setText(c.getTituloLibro());
+                autor.setText(c.getAutorLibro());
+                precio.setText(String.valueOf(c.getPrecio()));
+                descripcion.setText(c.getDescripcionLibro());
+                libro.setBounds(0, i, 547, 200);
+                agregarPublicacion((JComponent) libro);
+                i += 200;
+            }
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+    }
+
+    public void mostrarCompras() throws RemoteException{
+        int i = 0;
+        MuestraPublicaciones.removeAll();
+        MuestraPublicaciones.repaint();
+        MuestraPublicaciones.revalidate();
+        try {
+            ArrayList<ModeloCompra> compras = vinculo.mostrarComprasPorUsuario(UsuarioAux.getUsername());
+            if(compras != null){
+            for (ModeloCompra c : compras) {
+                Libro libro = new Libro();
+                Label titulo = libro.getTitulo();
+                Label autor = libro.getPublicacionAutor();
+                Label precio = libro.getPublicacionPrecio();
+                Label descripcion = libro.getPublicacionDescripcion();
+                titulo.setText(c.getTituloLibro());
+                autor.setText(c.getAutorLibro());
+                precio.setText(String.valueOf(c.getPrecio()));
+                descripcion.setText(c.getDescripcionLibro());
+                libro.setBounds(0, i, 547, 200);
+                agregarPublicacion((JComponent) libro);
+                i += 200;
+            }
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void publicaciones(){
-           MuestraPublicaciones.setPreferredSize(new Dimension(
-            (int)MuestraPublicaciones.getPreferredSize().getWidth(),
-            0));
-   
-      JComponent l = new Libro();
-      JComponent p = new Pregunta();
-      JComponent v = new Vendo();
-      v.setBounds(0, 0, 547, 170);
-      p.setBounds(0, 170, 547, 130);
-      l.setBounds(0, 300, 547, 200);
-      agregarPublicacion(v);
-      agregarPublicacion(l);
-      agregarPublicacion(p);
-     
-    }
-    public void conUsuario(){
-     JComponent t = new PrincipalUsuario();
-      t.setBounds(0, 0, 1000, 1000);
-      PanelMenu.add(t);
-      this.revalidate();
-      this.repaint();
-      this.pack();
-    }
-    public void sinUsuario(){
-     JComponent f = new PrincipalSinUsuario();
-      f.setBounds(0, 0, 1000, 1000);
-      PanelMenu.add(f);
-      this.revalidate();
-      this.repaint();
-      this.pack(); 
-      
-    }
-    public void cargaricono(){
-   Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
-   setIconImage(icon);
-   setVisible(true);
-   this.setLocationRelativeTo(null);
+    public void mostrarPreguntas() throws RemoteException{
+        int i = 0;
+        MuestraPublicaciones.removeAll();
+        MuestraPublicaciones.repaint();
+        MuestraPublicaciones.revalidate();
+        try {
+            ArrayList<ModeloPregunta> preguntas = vinculo.allPreguntasExceptPropias(UsuarioAux.getUsername());
+            if(preguntas != null){
+            for (ModeloPregunta c : preguntas) {
+                Pregunta pregunta = new Pregunta();
+                Label titulo = pregunta.getTituloPregunta();
+                Label descripcion = pregunta.getDescripcionPublicacion();
+                titulo.setText(c.getTituloPregunta());
+                descripcion.setText(c.getTexto());
+                pregunta.setBounds(0, i, 547, 200);
+                agregarPublicacion((JComponent) pregunta);
+                i += 200;
             }
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public void conUsuario() throws RemoteException {
+
+        PrincipalUsuario t = new PrincipalUsuario(this);
+        usuarios = vinculo.getDatosUsuario(UsuarioAux.getUsername());
+        saldo = t.getSaldo();
+        nombre = t.getUsuario();
+        saldo.setText("$" + String.valueOf(usuarios.getSaldo()));
+        nombre.setText(String.valueOf(usuarios.getUsername()));
+        t.setBounds(0, 0, 1000, 1000);
+        PanelMenu.add((JComponent) t);
+        this.revalidate();
+        this.repaint();
+        this.pack();
+    }
+
+    public void sinUsuario() {
+        JComponent f = new PrincipalSinUsuario(this);
+        f.setBounds(0, 0, 1000, 1000);
+        PanelMenu.add(f);
+        this.revalidate();
+        this.repaint();
+        this.pack();
+
+    }
+
+    public void cargaricono() {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
+        setIconImage(icon);
+        setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,10 +219,20 @@ public class Principal extends javax.swing.JFrame {
 
         Buscar.setForeground(new java.awt.Color(153, 153, 153));
         Buscar.setBorder(null);
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
 
         botonBuscar.setForeground(new java.awt.Color(153, 153, 153));
         botonBuscar.setText("Buscar");
         botonBuscar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        botonBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonBuscarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -170,7 +281,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +295,40 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+       
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseClicked
+        // TODO add your handling code here:
+        String busqueda = Buscar.getText();
+        System.out.println("Aqui estoy");
+        MuestraPublicaciones.removeAll();
+            MuestraPublicaciones.repaint();
+            MuestraPublicaciones.revalidate();
+        try {
+            int i = 0;
+            ArrayList<ModeloPregunta> preguntasBuscar = vinculo.buscarPregunta(busqueda);
+            if(preguntasBuscar != null){
+            for (ModeloPregunta p : preguntasBuscar) {
+                Pregunta miPregunta = new Pregunta();
+                Label tituloPregunta = miPregunta.getTituloPregunta();
+                Label descripcionPregunta = miPregunta.getDescripcionPublicacion();
+                
+                tituloPregunta.setText(p.getTituloPregunta());
+                descripcionPregunta.setText(p.getTexto());
+                miPregunta.setBounds(0, i, 547, 200);
+                agregarPublicacion((JComponent) miPregunta);
+                i += 200;
+                
+            }
+            }
+
+        } catch (RemoteException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } // TODO add your handling code here:
+    }//GEN-LAST:event_botonBuscarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -215,7 +360,11 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                try {
+                    new Principal().setVisible(true);
+                } catch (RemoteException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

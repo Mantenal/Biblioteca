@@ -29,9 +29,7 @@ public class ControladorLibros extends Conexion {
     
     public boolean insertLibro(String tituloLibro, String autor, String descripcion, int estado, double precio, String usuario) {
         try {
-            PreparedStatement sql = con.prepareStatement(
-                    "INSERT INTO libros "
-                    + "VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement sql = con.prepareStatement( "INSERT INTO libros (titulo_libro, autor, descripcion, estado, precio, fk_usuario) VALUES (?, ?, ?, ?, ?, ?)");
             sql.setString(1, tituloLibro);
             sql.setString(2, autor);
             sql.setString(3, descripcion);
@@ -55,9 +53,7 @@ public class ControladorLibros extends Conexion {
             ArrayList<ModeloLibros> listaLibros = new ArrayList<>();
             ResultSet resultLibros;
             PreparedStatement sql = con.prepareStatement(
-                    "SELECT *"
-                    + "FROM libros"
-                    + "WHERE fk_usuario = ?"
+                    "SELECT * FROM libros WHERE fk_usuario = ?"
             );
 
             sql.setString(1, usuario);
@@ -87,10 +83,7 @@ public class ControladorLibros extends Conexion {
         try {
             ArrayList<Modelos.ModeloLibros> listaLibros = new ArrayList<>();
             ResultSet resultLibros;
-            PreparedStatement sql = con.prepareStatement(""
-                    + "SELECT *"
-                    + "FROM libros "
-                    + "WHERE id_libro = ? AND fk_usuario = ?");
+            PreparedStatement sql = con.prepareStatement("SELECT * FROM libros WHERE id_libro = ? AND fk_usuario = ?");
 
             sql.setInt(1, id);
             sql.setString(2, usuario);
@@ -122,10 +115,7 @@ public class ControladorLibros extends Conexion {
         try {
             ArrayList<Modelos.ModeloLibros> listaLibros = new ArrayList<>();
             ResultSet resultLibros;
-            PreparedStatement sql = con.prepareStatement(""
-                    + "SELECT *"
-                    + "FROM libros "
-                    + "WHERE estado = ? AND fk_usuario = ?");
+            PreparedStatement sql = con.prepareStatement("SELECT * FROM libros WHERE estado = ? AND fk_usuario = ?");
 
             sql.setInt(1, estado);
             sql.setString(2, usuario);

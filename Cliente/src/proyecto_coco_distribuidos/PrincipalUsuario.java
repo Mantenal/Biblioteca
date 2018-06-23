@@ -5,17 +5,41 @@
  */
 package proyecto_coco_distribuidos;
 
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Danae
  */
 public class PrincipalUsuario extends javax.swing.JPanel {
 
+    private Principal miPrincipal;
+
     /**
      * Creates new form PrincipalUsuario
      */
-    public PrincipalUsuario() {
+    public PrincipalUsuario(Principal miPrincipal) {
         initComponents();
+        this.miPrincipal = miPrincipal;
+    }
+
+    public JLabel getSaldo() {
+        return Saldo;
+    }
+
+    public void setSaldo(JLabel Saldo) {
+        this.Saldo = Saldo;
+    }
+
+    public JLabel getUsuario() {
+        return Usuario;
+    }
+
+    public void setUsuario(JLabel Usuario) {
+        this.Usuario = Usuario;
     }
 
     /**
@@ -34,7 +58,7 @@ public class PrincipalUsuario extends javax.swing.JPanel {
         jSeparator4 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         Usuario = new javax.swing.JLabel();
-        Saldo1 = new javax.swing.JLabel();
+        Saldo = new javax.swing.JLabel();
         botonSalir = new javax.swing.JButton();
         botonNuevaVenta = new javax.swing.JButton();
         botonNuevaPublicacion = new javax.swing.JButton();
@@ -75,10 +99,10 @@ public class PrincipalUsuario extends javax.swing.JPanel {
         Usuario.setText("Nombre de Usuario");
         SinUsuario.add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 136, -1, -1));
 
-        Saldo1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        Saldo1.setForeground(new java.awt.Color(153, 153, 153));
-        Saldo1.setText("$Saldo");
-        SinUsuario.add(Saldo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 158, -1, -1));
+        Saldo.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Saldo.setForeground(new java.awt.Color(153, 153, 153));
+        Saldo.setText("$Saldo");
+        SinUsuario.add(Saldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 158, -1, -1));
 
         botonSalir.setBackground(new java.awt.Color(204, 204, 255));
         botonSalir.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -95,6 +119,11 @@ public class PrincipalUsuario extends javax.swing.JPanel {
         botonNuevaVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonNuevaVentaMouseClicked(evt);
+            }
+        });
+        botonNuevaVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevaVentaActionPerformed(evt);
             }
         });
         SinUsuario.add(botonNuevaVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 186, 26));
@@ -126,6 +155,16 @@ public class PrincipalUsuario extends javax.swing.JPanel {
         botonMisPublicaciones.setForeground(new java.awt.Color(255, 255, 255));
         botonMisPublicaciones.setText("Mis publicaciones");
         botonMisPublicaciones.setBorder(null);
+        botonMisPublicaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonMisPublicacionesMouseClicked(evt);
+            }
+        });
+        botonMisPublicaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMisPublicacionesActionPerformed(evt);
+            }
+        });
         SinUsuario.add(botonMisPublicaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 196, 21));
 
         jSeparator6.setForeground(new java.awt.Color(204, 204, 204));
@@ -163,23 +202,48 @@ public class PrincipalUsuario extends javax.swing.JPanel {
 
     private void botonNuevaVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonNuevaVentaMouseClicked
         // TODO add your handling code here:
-        PublicacionLibro libro=new PublicacionLibro();
+        PublicacionLibro libro = new PublicacionLibro();
         libro.setVisible(true);
     }//GEN-LAST:event_botonNuevaVentaMouseClicked
 
     private void botonNuevaPublicacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonNuevaPublicacionMouseClicked
         // TODO add your handling code here:
-        PublicacionForo foro= new PublicacionForo();
+        PublicacionForo foro = new PublicacionForo();
         foro.setVisible(true);
     }//GEN-LAST:event_botonNuevaPublicacionMouseClicked
 
     private void botonMisLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMisLibrosActionPerformed
-        // TODO add your handling code here:
+        try {
+            miPrincipal.mostrarCompras();
+        } catch (RemoteException ex) {
+            Logger.getLogger(PrincipalUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        miPrincipal.revalidate();
+        miPrincipal.repaint();
     }//GEN-LAST:event_botonMisLibrosActionPerformed
+
+    private void botonNuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonNuevaVentaActionPerformed
+
+    private void botonMisPublicacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMisPublicacionesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonMisPublicacionesActionPerformed
+
+    private void botonMisPublicacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMisPublicacionesMouseClicked
+        // TODO add your handling code here:
+        try {
+            miPrincipal.mostrarPreguntas();
+        } catch (RemoteException ex) {
+            Logger.getLogger(PrincipalUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        miPrincipal.revalidate();
+        miPrincipal.repaint();
+    }//GEN-LAST:event_botonMisPublicacionesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Saldo1;
+    private javax.swing.JLabel Saldo;
     private javax.swing.JPanel SinUsuario;
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton botonMisLibros;

@@ -194,6 +194,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonPublicarMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator4">
       <Properties>
@@ -217,6 +220,9 @@
           <Color blue="f8" green="b3" red="d6" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TituloPreguntaActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
