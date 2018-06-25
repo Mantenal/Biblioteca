@@ -14,12 +14,36 @@ import javax.swing.JButton;
  */
 public class Libro extends javax.swing.JPanel {
 
+    private int idLibro;
+    private String vendedor;
+    private double precio;
     /**
      * Creates new form Libro
      */
-    public Libro() {
+    public Libro(int idLibro, String vendedor, double precio) {
         initComponents();
+        this.idLibro = idLibro;
+        this.vendedor = vendedor;
+        this.precio = precio;
     }
+
+    public int getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(int idLibro) {
+        this.idLibro = idLibro;
+    }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
+    
+    
 
     public JButton getBotonDevolver() {
         return BotonDevolver;
@@ -90,7 +114,7 @@ public class Libro extends javax.swing.JPanel {
         PublicacionDescripcion = new java.awt.Label();
         BotonDevolver = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(216, 216, 216));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 255));
 
         Titulo.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         Titulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -204,7 +228,8 @@ public class Libro extends javax.swing.JPanel {
 
     private void BotonDevolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonDevolverMouseClicked
         // TODO add your handling code here:
-        ConfirmacionDevolucion devolucion = new ConfirmacionDevolucion();
+        ConfirmacionDevolucion devolucion = new ConfirmacionDevolucion(idLibro, vendedor, precio);
+
         devolucion.setVisible(true);
     }//GEN-LAST:event_BotonDevolverMouseClicked
 

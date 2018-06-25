@@ -126,7 +126,7 @@ public class PrincipalUsuario extends javax.swing.JPanel {
                 botonNuevaVentaActionPerformed(evt);
             }
         });
-        SinUsuario.add(botonNuevaVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 186, 26));
+        SinUsuario.add(botonNuevaVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 357, 196, 26));
 
         botonNuevaPublicacion.setBackground(new java.awt.Color(204, 204, 255));
         botonNuevaPublicacion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -148,7 +148,7 @@ public class PrincipalUsuario extends javax.swing.JPanel {
         botonMisVentas.setForeground(new java.awt.Color(255, 255, 255));
         botonMisVentas.setText("Mis ventas");
         botonMisVentas.setBorder(null);
-        SinUsuario.add(botonMisVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 196, 22));
+        SinUsuario.add(botonMisVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 286, 196, 22));
 
         botonMisPublicaciones.setBackground(new java.awt.Color(204, 204, 255));
         botonMisPublicaciones.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -183,7 +183,7 @@ public class PrincipalUsuario extends javax.swing.JPanel {
                 botonMisLibrosActionPerformed(evt);
             }
         });
-        SinUsuario.add(botonMisLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 200, 30));
+        SinUsuario.add(botonMisLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 207, 196, 30));
 
         jSeparator8.setForeground(new java.awt.Color(204, 204, 204));
         SinUsuario.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 206, 10));
@@ -213,11 +213,7 @@ public class PrincipalUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_botonNuevaPublicacionMouseClicked
 
     private void botonMisLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMisLibrosActionPerformed
-        try {
-            miPrincipal.mostrarCompras();
-        } catch (RemoteException ex) {
-            Logger.getLogger(PrincipalUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        miPrincipal.mostrarCompras();
         miPrincipal.revalidate();
         miPrincipal.repaint();
     }//GEN-LAST:event_botonMisLibrosActionPerformed
@@ -233,7 +229,7 @@ public class PrincipalUsuario extends javax.swing.JPanel {
     private void botonMisPublicacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMisPublicacionesMouseClicked
         // TODO add your handling code here:
         try {
-            miPrincipal.mostrarPreguntas();
+            miPrincipal.mostrarPreguntasPropias();
         } catch (RemoteException ex) {
             Logger.getLogger(PrincipalUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }

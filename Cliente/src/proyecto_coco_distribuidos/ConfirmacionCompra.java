@@ -5,8 +5,20 @@
  */
 package proyecto_coco_distribuidos;
 
+import Extras.UsuarioAux;
+import Main.ConexionRMI;
+import RMI.Informacion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.rmi.RemoteException;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,21 +26,31 @@ import java.awt.Toolkit;
  */
 public class ConfirmacionCompra extends javax.swing.JFrame {
 
+    private Informacion vinculo;
+    private int idLibro;
+    private double precio;
+    private String vendedor;
+
     /**
      * Creates new form CofirmacionCompra
      */
-    public ConfirmacionCompra() {
+    public ConfirmacionCompra(int idLibro, String vendedor, double precio) {
         initComponents();
-               this.setLocationRelativeTo(null);
+        this.idLibro = idLibro;
+        this.vendedor = vendedor;
+        this.precio = precio;
+        this.vinculo = new ConexionRMI().getC();
+        this.setLocationRelativeTo(null);
         cargaricono();
     }
-    
-    public void cargaricono(){
-   Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
-   setIconImage(icon);
-   setVisible(true);
-   this.setLocationRelativeTo(null);
-            }
+
+    public void cargaricono() {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
+        setIconImage(icon);
+        setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,8 +153,31 @@ public class ConfirmacionCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAceptarMouseClicked
-        // TODO add your handling code here:
-        
+        try {
+            // TODO add your handling code here:
+            DateFormat formato = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH);
+            Date fecha = formato.parse((new Date().toString()));
+            SimpleDateFormat otroFormato = new SimpleDateFormat("yyyy/MM/dd",Locale.ENGLISH);
+            otroFormato.format(fecha);
+            java.sql.Date sqlFecha = new java.sql.Date(fecha.getTime());
+
+            try {
+                if (precio <= UsuarioAux.getSaldo()) {
+                    UsuarioAux.setSaldo(UsuarioAux.getSaldo()-precio);
+                    if (vinculo.insertCompra(sqlFecha, UsuarioAux.getUsername(), idLibro, vendedor)) {
+                        JOptionPane.showMessageDialog(rootPane, "Libro comprado con exito");
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Error al comprar el libro");
+                    }
+                }else{
+                        JOptionPane.showMessageDialog(rootPane, "Saldo insuficiente ");
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(ConfirmacionCompra.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(ConfirmacionCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BotonAceptarMouseClicked
 
     private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
@@ -171,7 +216,7 @@ public class ConfirmacionCompra extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConfirmacionCompra().setVisible(true);
+                //   new ConfirmacionCompra().setVisible(true);
             }
         });
     }

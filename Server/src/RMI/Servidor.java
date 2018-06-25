@@ -12,7 +12,7 @@ public class Servidor {
     public Servidor() {
         try {
             Informacion c = new Impl();
-            Naming.rebind("rmi://192.168.84.215:1099/ServidorAl", c);
+            Naming.rebind("rmi://192.168.0.5:1099/ServidorAl", c);
         } catch (Exception e) {
             System.out.println("Trouble: " + e);
         }

@@ -147,6 +147,18 @@ public class Impl extends java.rmi.server.UnicastRemoteObject implements Informa
             throws java.rmi.RemoteException {
         return (pre.allPreguntasExceptPropias(usuario));
     }
+    
+    /**
+     * 
+     * @param usuario
+     * @return
+     * @throws java.rmi.RemoteException 
+     */
+    @Override
+     public ArrayList<ModeloPregunta> allPreguntasPropias(String usuario)
+            throws java.rmi.RemoteException {
+         return(pre.allPreguntasPropias(usuario));
+     }
 
     /**
      *
@@ -210,9 +222,22 @@ public class Impl extends java.rmi.server.UnicastRemoteObject implements Informa
      * @throws java.rmi.RemoteException
      */
     @Override
-    public ArrayList<ModeloLibros> mostrarLibrosPorEstado(String usuario, int estado)
+    public ArrayList<ModeloLibros> mostrarLibrosPorEstado(String usuario)
             throws java.rmi.RemoteException {
-        return (lib.mostrarLibrosPorEstado(usuario, estado));
+        return (lib.mostrarLibrosPorEstado(usuario));
+    }
+    
+    /**
+     * 
+     * @param busqueda
+     * @return
+     * @throws java.rmi.RemoteException 
+     */
+    
+    @Override
+    public ArrayList<ModeloLibros> buscarLibro(String busqueda)
+            throws java.rmi.RemoteException {
+        return (lib.buscarLibro(busqueda));
     }
 
     /**
@@ -264,6 +289,26 @@ public class Impl extends java.rmi.server.UnicastRemoteObject implements Informa
         return (com.mostrarVentasPorUsuario(usuario));
     }
 
+    /**
+     * 
+     * @param usuario
+     * @param libro
+     * @return
+     * @throws java.rmi.RemoteException 
+     */
+    @Override
+    public boolean devolverLibro(String usuario, int libro)
+            throws java.rmi.RemoteException{
+        return (com.devolverLibro(usuario, libro));
+    }
+    
+    /**
+     * 
+     * @param usuario
+     * @return
+     * @throws java.rmi.RemoteException 
+     */
+    @Override
     public double getSaldo(String usuario)
             throws java.rmi.RemoteException {
         return (user.getSaldo(usuario));

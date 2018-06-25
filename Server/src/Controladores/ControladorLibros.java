@@ -67,7 +67,8 @@ public class ControladorLibros extends Conexion {
                         resultLibros.getString("autor"),
                         resultLibros.getString("descripcion"),
                         resultLibros.getInt("estado"),
-                        resultLibros.getDouble("precio")
+                        resultLibros.getDouble("precio"),
+                        resultLibros.getString("fk_usuario")
                 ));
                 resultLibros.next();
             }
@@ -98,7 +99,8 @@ public class ControladorLibros extends Conexion {
                         resultLibros.getString("autor"),
                         resultLibros.getString("descripcion"),
                         resultLibros.getInt("estado"),
-                        resultLibros.getDouble("precio")
+                        resultLibros.getDouble("precio"),
+                        resultLibros.getString("fk_usuario")
                 ));
                 resultLibros.next();
             }
@@ -110,15 +112,14 @@ public class ControladorLibros extends Conexion {
         }
     }
     
-    //Estado = 0 = sin vender, Estado = 1 = vendido
-    public ArrayList<ModeloLibros> mostrarLibrosPorEstado(String usuario, int estado) {
+    
+    public ArrayList<ModeloLibros> mostrarLibrosPorEstado(String usuario) {
         try {
             ArrayList<Modelos.ModeloLibros> listaLibros = new ArrayList<>();
             ResultSet resultLibros;
-            PreparedStatement sql = con.prepareStatement("SELECT * FROM libros WHERE estado = ? AND fk_usuario = ?");
+            PreparedStatement sql = con.prepareStatement("SELECT * FROM libros WHERE fk_usuario != ?");
 
-            sql.setInt(1, estado);
-            sql.setString(2, usuario);
+            sql.setString(1, usuario);
 
             resultLibros = sql.executeQuery();
             resultLibros.first();
@@ -130,7 +131,42 @@ public class ControladorLibros extends Conexion {
                         resultLibros.getString("autor"),
                         resultLibros.getString("descripcion"),
                         resultLibros.getInt("estado"),
-                        resultLibros.getDouble("precio")
+                        resultLibros.getDouble("precio"),
+                        resultLibros.getString("fk_usuario")
+                ));
+                resultLibros.next();
+            }
+            resultLibros.close();
+            return listaLibros;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    
+    
+    public ArrayList<ModeloLibros> buscarLibro(String busqueda){
+            try {
+            ArrayList<ModeloLibros> listaLibros = new ArrayList<>();
+            ResultSet resultLibros;
+            PreparedStatement sql = con.prepareStatement(
+                    "SELECT * FROM libros WHERE titulo_libro LIKE ?"
+            );
+
+            sql.setString(1, ("%"+busqueda+"%"));
+            resultLibros = sql.executeQuery();
+            resultLibros.first();
+
+            while (!resultLibros.isAfterLast()) {
+                listaLibros.add(new ModeloLibros(
+                        resultLibros.getInt("id_libro"),
+                        resultLibros.getString("titulo_libro"),
+                        resultLibros.getString("autor"),
+                        resultLibros.getString("descripcion"),
+                        resultLibros.getInt("estado"),
+                        resultLibros.getDouble("precio"),
+                        resultLibros.getString("fk_usuario")
                 ));
                 resultLibros.next();
             }

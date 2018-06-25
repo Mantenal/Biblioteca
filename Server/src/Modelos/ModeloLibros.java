@@ -19,17 +19,19 @@ public class ModeloLibros implements Serializable {
     private String descripcion;
     private int estado;
     private double precio;
+    private String vendedor;
     
     public ModeloLibros(){
     }
 
-    public ModeloLibros(int idLibro, String tituloLibro, String autor, String descripcion, int estado, double precio) {
+    public ModeloLibros(int idLibro, String tituloLibro, String autor, String descripcion, int estado, double precio, String vendedor) {
         this.idLibro = idLibro;
         this.tituloLibro = tituloLibro;
         this.autor = autor;
         this.descripcion = descripcion;
         this.estado = estado;
         this.precio = precio;
+        this.vendedor = vendedor;
     }
    
 
@@ -80,6 +82,16 @@ public class ModeloLibros implements Serializable {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
+    
+    
     
     
 }

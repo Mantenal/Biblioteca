@@ -6,6 +6,7 @@
 package proyecto_coco_distribuidos;
 
 import java.awt.Label;
+import javax.swing.JButton;
 
 /**
  *
@@ -13,11 +14,14 @@ import java.awt.Label;
  */
 public class Pregunta extends javax.swing.JPanel {
 
+    private int id;
+
     /**
      * Creates new form Pregunta
      */
-    public Pregunta() {
+    public Pregunta(int id) {
         initComponents();
+        this.id = id;
     }
 
     public Label getDescripcionPublicacion() {
@@ -35,8 +39,14 @@ public class Pregunta extends javax.swing.JPanel {
     public void setTituloPregunta(Label tituloPregunta) {
         this.tituloPregunta = tituloPregunta;
     }
-    
-    
+
+    public JButton getResponderBoton() {
+        return BotonResponder;
+    }
+
+    public void setResponderBoton(JButton BotonResponder) {
+        this.BotonResponder = BotonResponder;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,7 +63,9 @@ public class Pregunta extends javax.swing.JPanel {
         descripcionPublicacion = new java.awt.Label();
         BotonResponder = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(216, 216, 216));
+        setPreferredSize(new java.awt.Dimension(611, 138));
+
+        jPanel1.setBackground(new java.awt.Color(204, 0, 204));
 
         tituloPregunta.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         tituloPregunta.setForeground(new java.awt.Color(255, 255, 255));
@@ -92,6 +104,11 @@ public class Pregunta extends javax.swing.JPanel {
                 BotonResponderMouseClicked(evt);
             }
         });
+        BotonResponder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonResponderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -103,9 +120,9 @@ public class Pregunta extends javax.swing.JPanel {
                 .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(descripcionPublicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BotonResponder, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,9 +139,14 @@ public class Pregunta extends javax.swing.JPanel {
 
     private void BotonResponderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonResponderMouseClicked
         // TODO add your handling code here:
-        PublicacionLibro libro =new PublicacionLibro();
-        libro.setVisible(true);
+
     }//GEN-LAST:event_BotonResponderMouseClicked
+
+    private void BotonResponderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonResponderActionPerformed
+        // TODO add your handling code here:
+        PublicacionRespuesta respuesta = new PublicacionRespuesta(id);
+        respuesta.setVisible(true);
+    }//GEN-LAST:event_BotonResponderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -134,4 +156,5 @@ public class Pregunta extends javax.swing.JPanel {
     private java.awt.Label label6;
     private java.awt.Label tituloPregunta;
     // End of variables declaration//GEN-END:variables
+
 }

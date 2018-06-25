@@ -24,7 +24,7 @@ public class ConexionRMI {
 
     public ConexionRMI() {
         try {
-            c = (Informacion) Naming.lookup("rmi://192.168.84.215:1099/ServidorAl");
+            c = (Informacion) Naming.lookup("rmi://192.168.0.5:1099/ServidorAl");
 
         } catch (MalformedURLException murle) {
             System.out.println();

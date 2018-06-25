@@ -309,7 +309,7 @@ public class Registro extends javax.swing.JFrame {
         String usuario = this.Usuario.getText();
         String contrasena = this.Contrasena.getText();
         String correo = this.Correo.getText();
-        double saldo = 100.00;
+        double saldo = 1000.00;
         
         if (!usuario.isEmpty() && !contrasena.isEmpty() && !correo.isEmpty()) {
             try {

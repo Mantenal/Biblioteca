@@ -5,18 +5,97 @@
  */
 package proyecto_coco_distribuidos;
 
+import java.awt.Label;
+import javax.swing.JButton;
+
 /**
  *
  * @author Danae
  */
 public class Vendo extends javax.swing.JPanel {
-
+    private int idLibro;
+    private String vendedor;
+    private double precio;
+    
     /**
      * Creates new form Vendo
      */
-    public Vendo() {
+    public Vendo(int idLibro, String vendedor, double precio) {
         initComponents();
+        this.idLibro = idLibro;
+        this.vendedor = vendedor;
+        this.precio = precio;
     }
+
+    public Label getTituloVenta() {
+        return tituloVenta;
+    }
+
+    public void setTituloVenta(Label tituloVenta) {
+        this.tituloVenta = tituloVenta;
+    }
+    
+    
+
+    public JButton getBotonComprar() {
+        return BotonComprar;
+    }
+
+    public void setBotonComprar(JButton BotonComprar) {
+        this.BotonComprar = BotonComprar;
+    }
+    
+    
+
+    public Label getEstadoVenta() {
+        return EstadoVenta;
+    }
+
+    public void setEstadoVenta(Label EstadoVenta) {
+        this.EstadoVenta = EstadoVenta;
+    }
+
+    public Label getPublicacionAutor() {
+        return PublicacionAutor;
+    }
+
+    public void setPublicacionAutor(Label PublicacionAutor) {
+        this.PublicacionAutor = PublicacionAutor;
+    }
+
+    public Label getPublicacionDescripcion() {
+        return PublicacionDescripcion;
+    }
+
+    public void setPublicacionDescripcion(Label PublicacionDescripcion) {
+        this.PublicacionDescripcion = PublicacionDescripcion;
+    }
+
+    public Label getPublicacionPrecio() {
+        return PublicacionPrecio;
+    }
+
+    public void setPublicacionPrecio(Label PublicacionPrecio) {
+        this.PublicacionPrecio = PublicacionPrecio;
+    }
+
+    public int getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(int idLibro) {
+        this.idLibro = idLibro;
+    }
+
+    public String getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(String vendedor) {
+        this.vendedor = vendedor;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +107,7 @@ public class Vendo extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        label1 = new java.awt.Label();
+        tituloVenta = new java.awt.Label();
         EstadoVenta = new java.awt.Label();
         label4 = new java.awt.Label();
         label7 = new java.awt.Label();
@@ -40,13 +119,13 @@ public class Vendo extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(534, 320));
 
-        jPanel1.setBackground(new java.awt.Color(216, 216, 216));
+        jPanel1.setBackground(new java.awt.Color(255, 102, 102));
 
-        label1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        label1.setForeground(new java.awt.Color(255, 255, 255));
-        label1.setText("Yo soy el Titulo de la venta ");
+        tituloVenta.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        tituloVenta.setForeground(new java.awt.Color(255, 255, 255));
+        tituloVenta.setText("Yo soy el Titulo de la venta ");
 
-        EstadoVenta.setBackground(new java.awt.Color(216, 216, 216));
+        EstadoVenta.setBackground(new java.awt.Color(255, 102, 102));
         EstadoVenta.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         EstadoVenta.setForeground(new java.awt.Color(255, 255, 255));
         EstadoVenta.setText("Disponible");
@@ -57,7 +136,7 @@ public class Vendo extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tituloVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(EstadoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -68,7 +147,7 @@ public class Vendo extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(EstadoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tituloVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -86,6 +165,11 @@ public class Vendo extends javax.swing.JPanel {
         BotonComprar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonComprarMouseClicked(evt);
+            }
+        });
+        BotonComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonComprarActionPerformed(evt);
             }
         });
 
@@ -155,9 +239,14 @@ public class Vendo extends javax.swing.JPanel {
 
     private void BotonComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonComprarMouseClicked
         // TODO add your handling code here:
-        ConfirmacionCompra compra =new ConfirmacionCompra();
-        compra.setVisible(true);
+        
     }//GEN-LAST:event_BotonComprarMouseClicked
+
+    private void BotonComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonComprarActionPerformed
+        // TODO add your handling code here:
+        ConfirmacionCompra compra =new ConfirmacionCompra(idLibro, vendedor, precio);
+        compra.setVisible(true);
+    }//GEN-LAST:event_BotonComprarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -167,9 +256,9 @@ public class Vendo extends javax.swing.JPanel {
     private java.awt.Label PublicacionDescripcion;
     private java.awt.Label PublicacionPrecio;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
     private java.awt.Label label4;
     private java.awt.Label label7;
     private java.awt.Label label8;
+    private java.awt.Label tituloVenta;
     // End of variables declaration//GEN-END:variables
 }

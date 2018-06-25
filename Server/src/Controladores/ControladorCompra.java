@@ -30,7 +30,7 @@ public class ControladorCompra extends Conexion {
     public boolean insertCompra(Date fecha, String usuarioCompra, int idLibro, String usuarioVenta) {
         try {
             PreparedStatement sql = con.prepareStatement(
-                    "INSERT INTO compra_venta VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO compra_venta(fecha, fk_usuario_com, fk_libro, fk_usuario_ven) VALUES (?, ?, ?, ?)");
             sql.setDate(1, fecha);
             sql.setString(2, usuarioCompra);
             sql.setInt(3, idLibro);
@@ -130,6 +130,23 @@ public class ControladorCompra extends Conexion {
         } catch (SQLException ex) {
             Logger.getLogger(ControladorCompra.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+    
+    public boolean devolverLibro(String usuario, int libro){
+        try {
+            PreparedStatement sql = con.prepareStatement(
+                    "DELETE FROM compra_venta WHERE fk_usuario_com = ? AND fk_libro = ? ");
+            sql.setString(1, usuario);
+            sql.setInt(2, libro);
+            if (sql.executeUpdate() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorLibros.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
 }

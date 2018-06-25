@@ -5,8 +5,15 @@
  */
 package proyecto_coco_distribuidos;
 
+import Extras.UsuarioAux;
+import Main.ConexionRMI;
+import RMI.Informacion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,21 +21,31 @@ import java.awt.Toolkit;
  */
 public class ConfirmacionDevolucion extends javax.swing.JFrame {
 
+    private int idLibro;
+    private String vendedor;
+    private double precio;
+    private Informacion vinculo;
+
     /**
      * Creates new form ConfirmacionDevolucion
      */
-    public ConfirmacionDevolucion() {
+    public ConfirmacionDevolucion(int idLibro, String vendedor, double precio) {
         initComponents();
-                   this.setLocationRelativeTo(null);
+        this.idLibro = idLibro;
+        this.vendedor = vendedor;
+        this.precio = precio;
+        this.vinculo = new ConexionRMI().getC();
+        this.setLocationRelativeTo(null);
         cargaricono();
     }
-    
-    public void cargaricono(){
-   Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
-   setIconImage(icon);
-   setVisible(true);
-   this.setLocationRelativeTo(null);
-            }
+
+    public void cargaricono() {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/icono.png"));
+        setIconImage(icon);
+        setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,6 +77,11 @@ public class ConfirmacionDevolucion extends javax.swing.JFrame {
         BotonAceptar.setText("Aceptar");
         BotonAceptar.setToolTipText("");
         BotonAceptar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        BotonAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonAceptarMouseClicked(evt);
+            }
+        });
 
         BotonCancelar.setForeground(new java.awt.Color(153, 153, 153));
         BotonCancelar.setText("Cancelar");
@@ -131,8 +153,23 @@ public class ConfirmacionDevolucion extends javax.swing.JFrame {
 
     private void BotonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonCancelarMouseClicked
         // TODO add your handling code here:
-                this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_BotonCancelarMouseClicked
+
+    private void BotonAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAceptarMouseClicked
+        try {
+            // TODO add your handling code here:
+            if (vinculo.devolverLibro(UsuarioAux.getUsername(), idLibro)) {
+                UsuarioAux.setSaldo(UsuarioAux.getSaldo()+precio);
+                JOptionPane.showMessageDialog(rootPane, "Devolución exitosa");
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Devolución erronea");
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(ConfirmacionDevolucion.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Devolución erronea");
+        }
+    }//GEN-LAST:event_BotonAceptarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -164,7 +201,7 @@ public class ConfirmacionDevolucion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConfirmacionDevolucion().setVisible(true);
+                // new ConfirmacionDevolucion().setVisible(true);
             }
         });
     }
